@@ -1,18 +1,26 @@
-// swift-tools-version:4.2
+// swift-tools-version:5.3
 
 import PackageDescription
 
 let package = Package(
     name: "SwiftUtilities",
+    platforms: [.iOS(.v14)],
     products: [
         .library(
             name: "SwiftUtilities",
-            targets: ["SwiftUtilities"])
+            targets: ["SwiftUtilities"]),
     ],
     targets: [
         .target(
             name: "SwiftUtilities",
-            path: "Source")
+            dependencies: [
+            ],
+            path: "Sources"
+        ),
+        .testTarget(
+            name: "SwiftUtilitiesTests",
+            dependencies: ["SwiftUtilities"]
+         ),
     ],
-    swiftLanguageVersions: [3, 4]
+    swiftLanguageVersions: [ .version("5.1") ]
 )
