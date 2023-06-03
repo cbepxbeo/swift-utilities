@@ -9,7 +9,7 @@ Status: #Complete | #Not decorated
 
 */
 
-public struct UniversalWrap<T> {
+public struct ValueWrapper<T> {
     public init(_ value: T) {
         self.value = value
     }
