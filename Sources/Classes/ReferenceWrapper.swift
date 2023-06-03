@@ -13,6 +13,5 @@ public final class ReferenceWrapper<T> {
     public init(_ value: T) {
         self.value = value
     }
-    
-    public let value: T
+    public var value: T
 }
