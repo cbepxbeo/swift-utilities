@@ -55,6 +55,11 @@ extension Device {
             "iPhone14,5"    : .iPhone13,
             "iPhone14,2"    : .iPhone13Pro,
             "iPhone14,3"    : .iPhone13ProMax,
+            "iPhone15,4"    : .iPhone15,
+            "iPhone15,5"    : .iPhone15Plus,
+            "iPhone16,1"    : .iPhone15Pro,
+            "iPhone16,2"    : .iPhone15ProMax,
+            
             "iPhone14,7"    : .iPhone14,
             "iPhone14,8"    : .iPhone14Plus,
             "iPhone15,2"    : .iPhone14Pro,
