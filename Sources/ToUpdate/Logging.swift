@@ -16,10 +16,18 @@ fileprivate let currentLogger = LoggerProvider.default(category: "logging")
 
 public protocol Logging {
     var logger: LoggerProvider.LoggerWrapper { get }
+    var loggerCategory: String? { get }
 }
 
 extension Logging {
+    public var loggerCategory: String? {
+        nil
+    }
     public var logger: LoggerProvider.LoggerWrapper {
-        currentLogger.withTypeLabel(type: Self.self)
+        if let loggerCategory {
+            return LoggerProvider.default(category: fromCamelCase(value: loggerCategory))
+        } else {
+            return currentLogger.withTypeLabel(type: Self.self)
+        }
     }
 }

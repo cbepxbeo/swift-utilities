@@ -41,12 +41,19 @@ extension LoggerProvider {
             self.label = "[\(fromCamelCase(value: label))] "
         }
         
-        public static func withMethodLabel(logger current: LoggerWrapper, label: String) -> LoggerWrapper{
+        public static func withMethodLabel(
+            logger current: LoggerWrapper,
+            label: String,
+            call: Bool = true,
+            divider: String? = " "
+        ) -> LoggerWrapper{
             let logger = current.copy()
             let methodNameWithoutParameters = label.split(separator: "(").first
             let methodName = "\(methodNameWithoutParameters ?? "")"
-            logger.label = "[method] [\(fromCamelCase(value: methodName))] "
-            logger.debug("Call")
+            logger.label = "[method] [\(fromCamelCase(value: methodName))]\(divider ?? "")"
+            if call {
+                logger.debug("Call")
+            }
             return logger
         }
         
@@ -62,8 +69,9 @@ extension LoggerProvider {
             return logger
         }
         
-        public func withMethodLabel(label: String) -> LoggerWrapper {
-            LoggerWrapper.withMethodLabel(logger: self, label: label)
+        @discardableResult
+        public func withMethodLabel(label: String, call: Bool = true) -> LoggerWrapper {
+            LoggerWrapper.withMethodLabel(logger: self, label: label, call: call)
         }
         
         public func withTypeLabel<T>(type: T.Type) -> LoggerWrapper {
@@ -90,7 +98,13 @@ extension LoggerProvider {
             self.debug("\(name): \(value?.debugDescription ?? "nil")")
         }
         
-        public func info(_ message: String){
+        public func info(_ messages: String...){
+            let message: String = messages.reduce("") { $0 + $1 + " " }
+            self.logger.debug("\(self.typeName ?? "")\((self.label ?? "") + message)")
+        }
+        
+        public func console(_ messages: String...){
+            let message: String = messages.reduce("") { $0 + $1 + " " }
             self.logger.debug("\(self.typeName ?? "")\((self.label ?? "") + message)")
         }
         

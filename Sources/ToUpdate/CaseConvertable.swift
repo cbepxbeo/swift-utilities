@@ -1,14 +1,14 @@
 /*
-
-Project: SwiftUtilities
-File: CaseConvertable.swift
-Created by: Egor Boyko
-Date: 03.01.2022
-
-
-Status: #Complete | #Not decorated
-
-*/
+ 
+ Project: SwiftUtilities
+ File: CaseConvertable.swift
+ Created by: Egor Boyko
+ Date: 03.01.2022
+ 
+ 
+ Status: #Complete | #Not decorated
+ 
+ */
 
 
 import Foundation
@@ -19,7 +19,7 @@ public protocol CaseConvertable: RawRepresentable, CaseIterable {
 }
 
 extension CaseConvertable {
-
+    
     public static var isFirstLetterUp: Bool { false }
     
     public var name: String {
@@ -31,6 +31,12 @@ extension CaseConvertable {
     private var string: String {
         self.rawValue as! String
     }
+    
+//    func her(){
+//        var lalue =
+//
+//
+//    }
     
     private func fromCamelCase(value: String) -> String {
         var iteration: Int = 0

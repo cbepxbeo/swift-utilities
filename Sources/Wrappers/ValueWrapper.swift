@@ -13,6 +13,5 @@ public struct ValueWrapper<T> {
     public init(_ value: T) {
         self.value = value
     }
-    
     public let value: T
 }
