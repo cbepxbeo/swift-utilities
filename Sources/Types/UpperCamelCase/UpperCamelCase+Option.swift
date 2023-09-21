@@ -9,3 +9,9 @@
  
  */
 
+extension UpperCamelCase {
+    public enum Option {
+        case lower
+        case upper
+    }
+}

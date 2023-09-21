@@ -9,3 +9,19 @@
  
  */
 
+extension UpperCamelCase {
+    public func transform(
+        separator: String = " ",
+        option: UpperCamelCase.Option = .lower) -> String {
+        values.reduce("") {
+            let output: String
+            switch option {
+            case .lower:
+                output = $1.lowercased()
+            case .upper:
+                output = $1.uppercased()
+            }
+            return $0.isEmpty ? $0 + output : $0 + separator + output
+        }
+    }
+}
