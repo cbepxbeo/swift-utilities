@@ -83,3 +83,4 @@ extension FileProvider where T == DefaultFileProviderPath {
     @available(*,deprecated, renamed: "main", message: "The property has been renamed")
     public static var shared : FileProvider { .main }
 }
+

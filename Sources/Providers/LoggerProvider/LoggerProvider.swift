@@ -1,22 +1,27 @@
 /*
-
-Project: SwiftUtilities
-File: LoggerProvider.swift
-Created by: Egor Boyko
-Date: 02.03.2021
-
-*/
+ 
+ Project: SwiftUtilities
+ File: LoggerProvider.swift
+ Created by: Egor Boyko
+ Date: 02.03.2021
+ 
+ */
 
 import OSLog
 
 public struct LoggerProvider {
-    public static func `default`(category: String) -> LoggerProvider.LoggerWrapper {
+    public static func `default`(category: String) -> ReferenceWrapper<Logger> {
         if let logger = self.storage[category] {
             return logger
         }
-        let logger: LoggerProvider.LoggerWrapper = .init(category: category)
+        let logger: ReferenceWrapper<Logger> = .init(
+            .init(
+                subsystem: Bundle.main.bundleIdentifier ?? "--",
+                category: category
+            )
+        )
         self.storage[category] = logger
         return logger
     }
-    internal static var storage: [String: LoggerProvider.LoggerWrapper] = [:]
+    static var storage: [String: ReferenceWrapper<Logger>] = [:]
 }

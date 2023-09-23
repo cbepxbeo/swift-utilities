@@ -9,7 +9,9 @@
  
  */
 
+import OSLog
+
 public protocol Logging {
-    var logger: LoggerProvider.LoggerWrapper { get }
+    var logger: Logger { get }
     var loggerCategory: String? { get }
 }
