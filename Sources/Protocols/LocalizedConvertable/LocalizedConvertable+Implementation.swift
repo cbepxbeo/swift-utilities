@@ -12,7 +12,7 @@
 import Foundation
 
 extension LocalizedConvertable {
-    public static var caseDelimiter: String { "_" }
+    public static var caseSeparator: String { "_" }
     public var key: String {
         self.output.uppercased()
     }

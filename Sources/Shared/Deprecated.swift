@@ -84,3 +84,22 @@ extension FileProvider where T == DefaultFileProviderPath {
     public static var shared : FileProvider { .main }
 }
 
+@available(*,deprecated, renamed: "DefaultFileProviderPath", message: "The type has been renamed")
+public typealias FileProviderPaths = DefaultFileProviderPath
+
+
+extension LoggerProvider {
+    @available(*,deprecated, message: "The type has been removed and will not be available in future versions")
+    public final class LoggerWrapper {
+        @available(*,deprecated, message: "The method has been removed")
+        public func withMethodLabel(label: String) -> Self {
+            self
+        }
+        @available(*,deprecated, message: "The method has been removed")
+        public func withTypeLabel(label: String) -> Self {
+            self
+        }
+        @available(*,deprecated, message: "The method has been removed")
+        public func debug(_ message: String){}
+    }
+}

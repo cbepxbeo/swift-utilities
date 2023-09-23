@@ -11,7 +11,10 @@
 
 extension FontConvertable {
     static public var caseSeparator: String { "-" }
+    public static var fontName: String {
+        "\(Self.self)"
+    }
     public var fontName: String {
-        self.output.prefix(1).uppercased() + self.output.dropFirst()
+        self.output
     }
 }

@@ -11,6 +11,6 @@
 
 extension FileProvider where T == DefaultFileProviderPath {
      public static var main : FileProvider {
-        FileProvider.getFromType(enumWithPaths: DefaultFileProviderPath.self)
+         FileProvider.instance(from: DefaultFileProviderPath.self)
     }
 }
