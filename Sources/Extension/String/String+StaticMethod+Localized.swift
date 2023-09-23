@@ -1,10 +1,9 @@
 /*
  
  Project: SwiftUtilities
- File: String.swift
+ File: String+StaticMethod+Localized.swift
  Created by: Egor Boyko
  Date: 13.12.2021
- 
  
  Status: #Complete | #Not decorated
  
