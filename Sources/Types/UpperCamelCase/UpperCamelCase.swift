@@ -19,3 +19,5 @@ public struct UpperCamelCase {
     public var rawValue: String
     var values: [String]
 }
+
+
