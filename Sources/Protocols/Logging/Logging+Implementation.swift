@@ -15,6 +15,7 @@ fileprivate let currentLogger = LoggerProvider.default(category: "logging")
 
 extension Logging {
     public var loggerCategory: String? { nil }
+    
     public var logger: Logger {
         if let loggerCategory {
             LoggerProvider.default(
@@ -32,17 +33,21 @@ extension Logging {
         functionName: String = #function,
         fileName: String = #file,
         lineNumber: Int = #line){
-            let message: String = messages.reduce("") { $0 + $1 + " " }
             let date = Date()
-            let timeInterval = date.timeIntervalSince1970
+            let message: String = messages.reduce("") { $0 + $1 + " " }
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "HH:mm:ss"
+            
+            let time = dateFormatter.string(from: date)
+            let interval = "\(date.timeIntervalSince1970)".split(separator: ".").last ?? ""
+
             let output = """
-            Time: \(dateFormatter.string(from: date)).\("\(timeInterval)".split(separator: ".").last ?? "")
+            Time: \(time).\(interval)
             Type: \(Self.self)
-            File: \(fileName)
+            File: \(fileName.split(separator: "/").last ?? "")
             Line: \(lineNumber)
             Function: \(functionName)
+            Thread: \(Thread.current)
             --------
             \(message)
             """
