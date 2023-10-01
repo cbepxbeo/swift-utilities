@@ -48,8 +48,9 @@ extension Logging {
             Line: \(lineNumber)
             Function: \(functionName)
             Thread: \(Thread.current)
-            --------
+            
             \(message)
+            __________________
             """
             self.logger.debug("\(output)")
         }
