@@ -12,7 +12,7 @@
 import Foundation
 
 extension FileProvider {
-    func path(_ directory: T) -> URL {
+    public func path(_ directory: T) -> URL {
         if let path = self.paths[directory.rawValue] {
             return path
         }
