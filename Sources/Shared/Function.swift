@@ -12,15 +12,28 @@
 import Foundation
 
 @inlinable
-public func toMainThread(_ closure: @escaping () -> ()){
-    if Thread.isMainThread {
-        closure()
-    } else {
-        DispatchQueue.main.async {
-            closure()
+public func toMainThread(
+    _ type: Synchronization = .sync,
+    _ closure: @escaping () -> ()){
+        switch type {
+        case .async:
+            DispatchQueue.main.async {
+                closure()
+            }
+        case .sync:
+            if Thread.isMainThread {
+                closure()
+            } else {
+                DispatchQueue.main.sync {
+                    closure()
+                }
+            }
+        case .after(let second):
+            DispatchQueue.main.asyncAfter(deadline: .now() + second){
+                closure()
+            }
         }
     }
-}
 
 /// Execute scoped modifications to `arg`.
 ///
@@ -38,7 +51,7 @@ public func toMainThread(_ closure: @escaping () -> ()){
 /// ```
 ///
 public func mutate<T>(_ arg: inout T, _ body: (inout T) -> Void) {
-  body(&arg)
+    body(&arg)
 }
 
 
