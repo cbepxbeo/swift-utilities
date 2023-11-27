@@ -1,17 +1,17 @@
 /*
 
 Project: SwiftUtilities
-File: UniversalWrap.swift
+File: ReferenceContainer.swift
 Created by: Egor Boyko
-Date: 21.05.2023
+Date: 03.06.2023
 
 Status: #Complete | #Not decorated
 
 */
 
-public struct ValueWrapper<T> {
+public final class ReferenceContainer<T> {
     public init(_ value: T) {
         self.value = value
     }
-    public let value: T
+    public var value: T
 }

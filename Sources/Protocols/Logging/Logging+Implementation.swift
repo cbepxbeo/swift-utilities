@@ -13,10 +13,18 @@ import OSLog
 
 fileprivate let currentLogger = LoggerProvider.default(category: "logging")
 
+public enum LoggingOption {
+    case debug
+    case info
+    case warning
+    case error
+}
+
 extension Logging {
+    public static var loggerCategory: String? { nil }
     public var loggerCategory: String? { nil }
     
-    public var logger: Logger {
+    public static var logger: Logger {
         if let loggerCategory {
             LoggerProvider.default(
                 category: UpperCamelCase(
@@ -28,8 +36,13 @@ extension Logging {
         }
     }
     
-    func debugLog(
+    public var logger: Logger {
+        Self.logger
+    }
+    
+    static func log(
         _ messages: [String],
+        option: LoggingOption,
         functionName: String = #function,
         fileName: String = #file,
         lineNumber: Int = #line){
@@ -50,9 +63,34 @@ extension Logging {
             Thread: \(Thread.current)
             
             \(message)
-            __________________
             """
-            self.logger.debug("\(output)")
+            switch option {
+            case .debug:
+                self.logger.debug("\(output)")
+            case .info:
+                self.logger.info("\(output)")
+            case .warning:
+                self.logger.warning("\(output)")
+            case .error:
+                self.logger.error("\(output)")
+            }
+           
+        }
+    
+    public static func debugLog(
+        _ messages: String...,
+        functionName: String = #function,
+        fileName: String = #file,
+        lineNumber: Int = #line){
+#if DEBUG//-----------------------------------------------------------------------------------------
+            self.log(
+                messages,
+                option: .debug,
+                functionName: functionName,
+                fileName: fileName,
+                lineNumber: lineNumber
+            )
+#endif//--------------------------------------------------------------------------------------------
         }
     
     public func debugLog(
@@ -60,14 +98,45 @@ extension Logging {
         functionName: String = #function,
         fileName: String = #file,
         lineNumber: Int = #line){
-#if DEBUG//-----------------------------------------------------------------------------------------
-            self.debugLog(
+            Self.log(
                 messages,
+                option: .debug,
                 functionName: functionName,
                 fileName: fileName,
                 lineNumber: lineNumber
             )
-#endif//--------------------------------------------------------------------------------------------
+        }
+    
+    
+    
+    public func log(
+        _ messages: String...,
+        option: LoggingOption,
+        functionName: String = #function,
+        fileName: String = #file,
+        lineNumber: Int = #line){
+            Self.log(
+                messages,
+                option: option,
+                functionName: functionName,
+                fileName: fileName,
+                lineNumber: lineNumber
+            )
+        }
+    
+    public static func log(
+        _ messages: String...,
+        option: LoggingOption,
+        functionName: String = #function,
+        fileName: String = #file,
+        lineNumber: Int = #line){
+            self.log(
+                messages,
+                option: option,
+                functionName: functionName,
+                fileName: fileName,
+                lineNumber: lineNumber
+            )
         }
     
 }

@@ -103,3 +103,9 @@ extension LoggerProvider {
         public func debug(_ message: String){}
     }
 }
+
+@available(*,deprecated, renamed: "ReferenceContainer", message: "The type has been renamed")
+public typealias ReferenceWrapper = ReferenceContainer
+
+@available(*,deprecated, renamed: "ValueContainer", message: "The type has been renamed")
+public typealias ValueWrapper = ValueContainer
