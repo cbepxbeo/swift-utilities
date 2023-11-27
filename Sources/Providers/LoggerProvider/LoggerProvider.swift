@@ -10,11 +10,11 @@
 import OSLog
 
 public struct LoggerProvider {
-    public static func `default`(category: String) -> ReferenceWrapper<Logger> {
+    public static func `default`(category: String) -> ReferenceContainer<Logger> {
         if let logger = self.storage[category] {
             return logger
         }
-        let logger: ReferenceWrapper<Logger> = .init(
+        let logger: ReferenceContainer<Logger> = .init(
             .init(
                 subsystem: Bundle.main.bundleIdentifier ?? "--",
                 category: category
@@ -23,5 +23,5 @@ public struct LoggerProvider {
         self.storage[category] = logger
         return logger
     }
-    static var storage: [String: ReferenceWrapper<Logger>] = [:]
+    static var storage: [String: ReferenceContainer<Logger>] = [:]
 }
